@@ -50,7 +50,13 @@ while running:
                     estrelas = []
                     print("Pontos deletados!")
             
-            display.blit(fundo, (0, 0))
+        def escrita(texto, cor, posicao):
+            texto_renderizado = fonte.render(texto, True, cor)
+            display.blit(texto_renderizado, posicao)
+        display.blit(fundo, (0, 0))
+        escrita(texto_1, branco, posicao_texto_1)
+        escrita(texto_2, branco, posicao_texto_2)
+        escrita(texto_3, branco, posicao_texto_3)
         
         pygame.display.update()
         clock.tick(75)
