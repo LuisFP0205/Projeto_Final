@@ -3,7 +3,7 @@ import os
 import time
 import random
 from tkinter import simpledialog
-
+import pickle
 pygame.init()
 pygame.display.set_caption("Space Machine")
 branco = (255, 255, 255)
@@ -34,7 +34,21 @@ while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_F10:
+                    with open("points.pkl", "wb") as arquivo:
+                        pickle.dump(estrelas, arquivo)
+                    print("Pontos salvos!")
+                elif event.key == pygame.K_F11:
+                    try:
+                        with open("points.pkl", "rb") as arquivo:
+                            estrelas = pickle.load(arquivo)
+                        print("Pontos carregados!")
+                    except FileNotFoundError:
+                        print("Arquivo de pontos não encontrado.")
+                elif event.key == pygame.K_F12:
+                    estrelas = []
+                    print("Pontos deletados!")
             
             display.blit(fundo, (0, 0))
         
