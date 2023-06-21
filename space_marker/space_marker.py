@@ -49,7 +49,13 @@ while running:
                 elif event.key == pygame.K_F12:
                     estrelas = []
                     print("Pontos deletados!")
-            
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                item = simpledialog.askstring("Space", "Nome da Estrela: ")
+                print(item)
+                if item is None:
+                    item = "desconhecido"
+                estrelas.append((pos, item))
         def escrita(texto, cor, posicao):
             texto_renderizado = fonte.render(texto, True, cor)
             display.blit(texto_renderizado, posicao)
@@ -58,6 +64,9 @@ while running:
         escrita(texto_2, branco, posicao_texto_2)
         escrita(texto_3, branco, posicao_texto_3)
         
+        if len(estrelas) >= 2:
+            pontos = [pos for pos, item in estrelas]
+            pygame.draw.lines(display, branco, False, pontos, 2)
         pygame.display.update()
         clock.tick(75)
     except Exception as e:
