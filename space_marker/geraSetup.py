@@ -7,7 +7,7 @@ cx_Freeze.setup(
     name = "Space Machine Power",
     options={
         "build_exe":{
-            "packages":["pygame","os","time","random","pickle","simpledialog"],
+            "packages":["pygame","os","time","random","pickle",],
             "include_files":["assets/bg.jpg",
                             "assets/space.png",
                             "assets/Space_Machine_Power.mp3"]
@@ -15,5 +15,5 @@ cx_Freeze.setup(
     }, executables = executables
 )
 
-#py setup.py build
-#py setup.py bdist_msi
+#py geraSetup.py build
+#py geraSetup.py bdist_msi
