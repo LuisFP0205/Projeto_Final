@@ -63,7 +63,12 @@ while running:
         escrita(texto_1, branco, posicao_texto_1)
         escrita(texto_2, branco, posicao_texto_2)
         escrita(texto_3, branco, posicao_texto_3)
-        
+        for pos, item in estrelas:
+            pygame.draw.circle(display, branco, pos, 3)
+            texto_superficie = fonte.render(item + " - " + str(pos), True, branco)
+            texto_rect = texto_superficie.get_rect()
+            texto_rect.center = (pos[0], pos[1] - 20)
+            display.blit(texto_superficie, texto_rect)
         if len(estrelas) >= 2:
             pontos = [pos for pos, item in estrelas]
             pygame.draw.lines(display, branco, False, pontos, 2)
