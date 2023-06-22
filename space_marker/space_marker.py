@@ -7,6 +7,7 @@ import pickle
 pygame.init()
 pygame.display.set_caption("Space Machine")
 branco = (255, 255, 255)
+red = (255, 0, 0)
 fundo = pygame.image.load("assets/bg.jpg")
 tamanho = (1000, 563)
 cor_fundo = (128, 128, 128)
@@ -60,9 +61,11 @@ while running:
             texto_renderizado = fonte.render(texto, True, cor)
             display.blit(texto_renderizado, posicao)
         display.blit(fundo, (0, 0))
+        
         escrita(texto_1, branco, posicao_texto_1)
         escrita(texto_2, branco, posicao_texto_2)
         escrita(texto_3, branco, posicao_texto_3)
+
         for pos, item in estrelas:
             pygame.draw.circle(display, branco, pos, 3)
             texto_superficie = fonte.render(item + " - " + str(pos), True, branco)
@@ -72,6 +75,18 @@ while running:
         if len(estrelas) >= 2:
             pontos = [pos for pos, item in estrelas]
             pygame.draw.lines(display, branco, False, pontos, 2)
+
+            for i in range(len(estrelas) - 1):
+                po1 = estrelas[i][0]
+                po2 = estrelas[i+1][0]
+                soma = po1[0] + po2[0] + po1[1] + po2[1]
+                meio_x = (po1[0] + po2[0]) // 2
+                meio_y = (po1[1] + po2[1]) // 2
+                texto_soma = fonte.render(str(soma), True, red)
+                texto_soma_rect = texto_soma.get_rect()
+                texto_soma_rect.center = (meio_x, meio_y)
+                display.blit(texto_soma, texto_soma_rect)
+
         pygame.display.update()
         clock.tick(75)
     except Exception as e:
